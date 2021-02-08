@@ -1,9 +1,39 @@
 import React, { Component } from 'react';
 
 class TaskForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            status: false,
+        }
+    }
+
     onCloseForm = () => {
         this.props.onCloseForm();
     }
+    onHandleChange = (event) => {
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        if (name === "status") {
+            if(value === "true") {
+                value = true;
+            } else {
+                value = false;
+            } 
+            
+        }
+        this.setState({
+            [name]: value
+        });
+    }
+
+    onHandleSubmit = (event) => {
+        event.preventDefault();
+        this.props.onHandleSubmit(this.state);
+    }
+
     render() {
         return (<div className="panel panel-warning">
             <div className="panel-heading">
@@ -11,18 +41,22 @@ class TaskForm extends Component {
             </div>
             <div className="panel-body">
 
-                <form>
+                <form onSubmit={this.onHandleSubmit}>
                     <div className="form-group">
                         <label>Title: </label>
                         <input
                             type="text"
                             className="form-control"
-                            name="txtTitle" />
+                            name="title"
+                            onChange={this.onHandleChange}
+                            value={this.state.title} />
                     </div>
                     <label>Status: </label>
                     <select
                         className="form-control"
                         name="status"
+                        onChange={this.onHandleChange}
+                        value={this.state.status}
                     >
                         <option value={true}>Enable</option>
                         <option value={false}>Disable</option>

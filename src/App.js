@@ -19,7 +19,6 @@ class App extends Component {
       this.setState({
         tasks: tasks
       })
-      console.log(tasks);
     }
   }
 
@@ -58,19 +57,32 @@ class App extends Component {
 
   onToggleForm = () => {
     this.setState({
-      isDisplayForm : !this.state.isDisplayForm
+      isDisplayForm: !this.state.isDisplayForm
     })
   }
 
   onCloseForm = () => {
     this.setState({
-      isDisplayForm : false
+      isDisplayForm: false
     })
   }
 
+  onHandleSubmit = (data) => {
+    var {tasks} = this.state;
+    data.id = this.generateID;
+    console.log(data);
+    tasks.push(data);
+    this.setState({
+      tasks: tasks
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  } 
+
   render() {
     var { tasks, isDisplayForm } = this.state;
-    var elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onCloseForm}/> : '';
+    var elmTaskForm = isDisplayForm ?
+      <TaskForm onHandleSubmit={this.onHandleSubmit}
+        onCloseForm={this.onCloseForm} /> : '';
     return (
       <div className="container">
         <div className="text-center">
@@ -85,10 +97,10 @@ class App extends Component {
 
           <div className={isDisplayForm ?
             "col-xs-8 col-sm-8 col-md-8 col-lg-8" : "col-xs-12 col-sm-12 col-md-12 col-lg-12"}>
-            <button 
-            type="button" 
-            className="btn btn-primary"
-            onClick={this.onToggleForm}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={this.onToggleForm}>
               <span className="fa fa-plus mr-5"></span>Add task
             </button>
             <button
