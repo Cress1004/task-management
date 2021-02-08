@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
 class TaskForm extends Component {
+    onCloseForm = () => {
+        this.props.onCloseForm();
+    }
     render() {
         return (<div className="panel panel-warning">
             <div className="panel-heading">
-                <h3 className="panel-title">Add task
-                    <span className="fa fa-times-circle text-right"></span>
-                </h3>
+                <h3 className="panel-title">Add task</h3>
             </div>
             <div className="panel-body">
 
@@ -28,10 +29,15 @@ class TaskForm extends Component {
                     </select><br />
 
                     <div className="text-center">
-                    <button type="submit" className="btn btn-warning">Save</button> &nbsp;
-                    <button type="button" className="btn btn-danger">Cancel</button>
+                        <button type="submit" className="btn btn-warning">Save</button> &nbsp;
+                    <button type="button" className="btn btn-danger">Cancel</button> &nbsp;
+                    <button
+                            type="button"
+                            className="btn btn-success"
+                            onClick={this.onCloseForm}
+                        >Close</button>
                     </div>
-                    
+
 
                 </form>
 
