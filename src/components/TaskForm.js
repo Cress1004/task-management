@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 
-class App extends Component {
+class TaskForm extends Component {
     render() {
         return (<div className="panel panel-warning">
             <div className="panel-heading">
@@ -12,7 +11,7 @@ class App extends Component {
             <div className="panel-body">
 
                 <form>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label>Title: </label>
                         <input
                             type="text"
@@ -43,4 +42,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default TaskForm;
