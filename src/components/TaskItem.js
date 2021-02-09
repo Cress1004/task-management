@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class TaskItem extends Component {
+    onUpdateStatus = () => {
+        this.props.onUpdateStatus(this.props.task.id);
+    }
+
     render() {
         var { task, index } = this.props;
         return (
@@ -9,7 +13,8 @@ class TaskItem extends Component {
                 <td>{task.title}</td>
                 <td className="text-center">
                     <span className={task.status === true ?
-                        'label label-danger' : 'label label-success'}>
+                        'label label-danger' : 'label label-success'}
+                        onClick={this.onUpdateStatus}>
                         {task.status === true ? 'Enable' : 'Disable'}
                     </span>
                 </td>

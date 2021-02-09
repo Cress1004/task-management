@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import TaskItem from './TaskItem';
 
 class TaskList extends Component {
+    onUpdateStatus = (id) => {
+        this.props.onUpdateStatus(id);
+    }
+
     render() {
         var { tasks } = this.props;
         var elmTask = tasks.map((task, index) => {
-            return <TaskItem key={task.id} index={index} task={task}/>
+            return <TaskItem
+                key={index}
+                index={index}
+                task={task}
+                onUpdateStatus={this.onUpdateStatus} />
         })
         return (
             <div className="row mt-15">
@@ -29,7 +37,6 @@ class TaskList extends Component {
                                     className="form-control" />
                             </td>
                             <td>
-
                                 <select
                                     name="filterStatus"
                                     className="form-control"
@@ -41,7 +48,7 @@ class TaskList extends Component {
                             </td>
                             <td></td>
                         </tr>
-                        { elmTask }
+                        {elmTask}
                     </tbody>
                 </table>
             </div>
