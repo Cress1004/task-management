@@ -9,29 +9,41 @@ class TaskForm extends Component {
         }
     }
 
-    onCloseForm = () => {
-        this.props.onCloseForm();
-    }
     onHandleChange = (event) => {
         var target = event.target;
         var name = target.name;
         var value = target.value;
         if (name === "status") {
-            if(value === "true") {
+            if (value === "true") {
                 value = true;
             } else {
                 value = false;
-            } 
-            
+            }
+
         }
         this.setState({
             [name]: value
         });
     }
 
+    onCloseForm = () => {
+        this.props.onCloseForm();
+    }
+
+    onHandleClear = () => {
+        this.setState({
+            title: '',
+            status: false
+        })
+        this.onCloseForm();
+    }
+
     onHandleSubmit = (event) => {
         event.preventDefault();
         this.props.onHandleSubmit(this.state);
+        // Clear & Close form
+        this.onHandleClear();
+        this.onCloseForm();
     }
 
     render() {
@@ -64,22 +76,22 @@ class TaskForm extends Component {
 
                     <div className="text-center">
                         <button type="submit" className="btn btn-warning">Save</button> &nbsp;
-                    <button type="button" className="btn btn-danger">Cancel</button> &nbsp;
+                    <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={this.onHandleClear}
+                        >Cancel</button> &nbsp;
                     <button
                             type="button"
                             className="btn btn-success"
                             onClick={this.onCloseForm}
                         >Close</button>
                     </div>
-
-
                 </form>
-
             </div>
         </div>
         )
     };
-
 }
 
 export default TaskForm;

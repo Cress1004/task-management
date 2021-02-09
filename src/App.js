@@ -22,29 +22,29 @@ class App extends Component {
     }
   }
 
-  onGenerateData = () => {
-    var tasks = [
-      {
-        id: this.generateID(),
-        title: "Learn Japanese",
-        status: true,
-      },
-      {
-        id: this.generateID(),
-        title: "Learn ENGLISh",
-        status: false,
-      },
-      {
-        id: this.generateID(),
-        title: "Learn Code",
-        status: true
-      }
-    ];
-    this.setState({
-      tasks: tasks
-    })
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }
+  // onGenerateData = () => {
+  //   var tasks = [
+  //     {
+  //       id: this.generateID(),
+  //       title: "Learn Japanese",
+  //       status: true,
+  //     },
+  //     {
+  //       id: this.generateID(),
+  //       title: "Learn ENGLISh",
+  //       status: false,
+  //     },
+  //     {
+  //       id: this.generateID(),
+  //       title: "Learn Code",
+  //       status: true
+  //     }
+  //   ];
+  //   this.setState({
+  //     tasks: tasks
+  //   })
+  //   localStorage.setItem('tasks', JSON.stringify(tasks));
+  // }
 
   s4() {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -103,12 +103,12 @@ class App extends Component {
               onClick={this.onToggleForm}>
               <span className="fa fa-plus mr-5"></span>Add task
             </button>
-            <button
+            {/* <button
               type="button"
               className="btn btn-danger"
               onClick={this.onGenerateData}>
               Generate Data
-            </button>
+            </button> */}
             <br /><br />
             <Control />
             <br />
