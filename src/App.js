@@ -51,8 +51,8 @@ class App extends Component {
   }
 
   generateID() {
-    return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4()
-      + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4();
+    return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
+    this.s4() + '-' + this.s4() + this.s4() + this.s4();
   }
 
   onToggleForm = () => {
@@ -68,33 +68,47 @@ class App extends Component {
   }
 
   onHandleSubmit = (data) => {
-    var {tasks} = this.state;
-    data.id = this.generateID;
-    console.log(data);
+    var { tasks } = this.state;
+    data.id = this.generateID();
+    console.log(data.id);
     tasks.push(data);
     this.setState({
       tasks: tasks
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
-  } 
+  }
 
   onUpdateStatus = (id) => {
-    var {tasks} = this.state;
+    var { tasks } = this.state;
     var index = this.findIndex(id);
-    if(index !== -1) {
+    console.log(index);
+    if (index !== -1) {
       tasks[index].status = !tasks[index].status;
       this.setState({
-        tasks : tasks
+        tasks: tasks
       });
-    } 
+    }
     localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  onDelete = (id) => {
+    var { tasks } = this.state;
+    var index = this.findIndex(id);
+    if (index !== -1) {
+      tasks.splice(index, 1);
+      this.setState({
+        tasks: tasks
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    this.onCloseForm();
   }
 
   findIndex = (id) => {
     var result = -1
     var { tasks } = this.state;
     tasks.forEach((task, index) => {
-      if(task.id === id) {
+      if (task.id === id) {
         result = index;
       }
     });
@@ -135,9 +149,10 @@ class App extends Component {
             <br /><br />
             <Control />
             <br />
-            <TaskList 
-            tasks={tasks} 
-            onUpdateStatus={this.onUpdateStatus}/>
+            <TaskList
+              tasks={tasks}
+              onUpdateStatus={this.onUpdateStatus}
+              onDelete={this.onDelete} />
           </div>
         </div>
       </div >

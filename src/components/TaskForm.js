@@ -75,7 +75,10 @@ class TaskForm extends Component {
                     </select><br />
 
                     <div className="text-center">
-                        <button type="submit" className="btn btn-warning">Save</button> &nbsp;
+                        <button type="submit"
+                            className="btn btn-warning"
+                            onClick={this.onHandleSubmit}
+                        >Save</button> &nbsp;
                     <button
                             type="button"
                             className="btn btn-danger"
